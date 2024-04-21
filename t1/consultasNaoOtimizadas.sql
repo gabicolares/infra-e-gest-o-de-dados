@@ -38,3 +38,20 @@ WHERE
     origem.country = 'BRAZIL'
     AND
     destino.country = 'BRAZIL'
+
+-- 3- Listar o número do voo, o nome do aeroporto de saída e o nome do aeroporto de destino, o nome completo (primeiro e último nome) e o assento de cada passageiro, 
+-- para todos os voos que partem no dia do seu aniversário (do seu mesmo, caro aluno, e não o do passageiro) neste ano (caso a consulta não retorne nenhuma linha, 
+-- faça para o dia subsequente até encontrar uma data que retorne alguma linha). [resposta sugerida = 106 linhas para o dia 25/03/2024]
+
+SELECT 
+    af.flightno AS num_voo, 
+    aap_origem.name AS aeroporto_origem, 
+    aap_destino.name AS aeroporto_destino, 
+    ap.firstname || ' ' || ap.lastname AS nome, 
+    ab.seat AS assento
+FROM air_flights af
+    INNER JOIN air_airports aap_origem ON af.from_airport_id = aap_origem.airport_id
+    INNER JOIN air_airports aap_destino ON af.to_airport_id = aap_destino.airport_id
+    INNER JOIN air_bookings ab ON af.flight_id = ab.flight_id
+    INNER JOIN air_passengers ap ON ab.passenger_id = ap.passenger_id
+WHERE TRUNC(af.departure) = TRUNC(TO_DATE('14/01/2024', 'DD/MM/YYYY'));
