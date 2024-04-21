@@ -54,4 +54,17 @@ FROM air_flights af
     INNER JOIN air_airports aap_destino ON af.to_airport_id = aap_destino.airport_id
     INNER JOIN air_bookings ab ON af.flight_id = ab.flight_id
     INNER JOIN air_passengers ap ON ab.passenger_id = ap.passenger_id
-WHERE TRUNC(af.departure) = TRUNC(TO_DATE('14/01/2024', 'DD/MM/YYYY'));
+WHERE TRUNC(af.departure) = TRUNC(TO_DATE('14/01/2024', 'dd/mm/yyyy'));
+
+-- 4- Listar o nome da companhia aérea bem como a data e a hora de saída de todos os voos que chegam para a cidade de 'NEW YORK' que partem às terças, 
+-- quartas ou quintas-feiras, no mês do seu aniversário  (caso a consulta não retorne nenhuma linha, faça para o mês subsequente até encontrar um mês que retorne alguma linha). 
+-- [resposta sugerida = 1 linha para o mês de março de 2024]
+SELECT 
+    aal.airline_name AS companhia, 
+    TO_CHAR(af.departure, 'dd/mm/yyyy hh24:mi') AS data_hora_saida
+FROM air_airlines aal
+    INNER JOIN air_flights af ON aal.airline_id = af.airline_id
+    INNER JOIN air_flights_schedules afs ON af.flightno = afs.flightno
+    INNER JOIN air_airports aap ON af.to_airport_id = aap.airport_id
+    INNER JOIN air_airports_geo cidade_destino ON aap.airport_id = cidade_destino.airport_id
+WHERE cidade_destino.city = 'NEW YORK' AND (afs.tuesday = 1 OR afs.wednesday = 1 or afs.thursday = 1) AND EXTRACT(MONTH from af.departure) = 1;
