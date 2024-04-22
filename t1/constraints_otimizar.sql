@@ -53,6 +53,17 @@ ALTER TABLE air_airports ADD CONSTRAINT ak_icao UNIQUE (icao);
 ALTER TABLE air_bookings ADD CONSTRAINT ak_flight_id UNIQUE (flight_id);
 ALTER TABLE air_bookings ADD CONSTRAINT ak_seat UNIQUE (seat);
 
+CREATE UNIQUE INDEX ak_air_bookings_flightidseat ON air_bookings (
+    CASE
+        WHEN seat IS NOT NULL THEN flight_id
+        ELSE NULL
+    END,
+    CASE
+        WHEN seat IS NOT NULL THEN seat
+        ELSE NULL
+    END
+);
+
 ALTER TABLE air_passengers ADD CONSTRAINT ak_passportno UNIQUE (passportno);
 
 -- indexes

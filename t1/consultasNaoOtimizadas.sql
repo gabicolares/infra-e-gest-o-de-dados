@@ -10,7 +10,7 @@ FROM air_passengers ap
     INNER JOIN air_passengers_details apd ON ap.passenger_id = apd.passenger_id
 WHERE
     apd.sex = 'w' 
-    AND 40 < TRUNC(MONTHS_BETWEEN(SYSDATE, apd.birthdate) / 12)
+    AND apd.birthdate < ADD_MONTHS(SYSDATE,-40*12)
     AND apd.country = 'BRAZIL';
 
 -- 2- Listar o nome da companhia aerea, o identificador da aeronave, o nome do tipo de aeronave e o numero de 
