@@ -29,7 +29,7 @@ CREATE TABLE AIR_BOOKINGS CLUSTER cl_flights_bookings(flight_id) AS SELECT * FRO
 -- airports-passenger_details
 CREATE CLUSTER cl_airports(airport_id numeric(5)) SIZE 1024 SINGLE TABLE HASHKEYS 128
     storage (
-        INITIAL 8K
+        INITIAL 1024K
     );
     
 CREATE INDEX idx_cl_airports ON CLUSTER cl_airports;
