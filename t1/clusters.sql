@@ -1,8 +1,5 @@
 -- passengers-passengers_details
-CREATE CLUSTER cl_passengers(passenger_id numeric(12)) HASHKEYS 128
-    storage (
-        INITIAL 8K
-    );
+CREATE CLUSTER cl_passengers(passenger_id numeric(12)) INDEX;
     
 CREATE INDEX idx_cl_passengers ON CLUSTER cl_passengers;
 
@@ -14,10 +11,8 @@ CREATE TABLE AIR_PASSENGERS_DETAILS CLUSTER cl_passengers(passenger_id) AS SELEC
 
 
 -- flights-bookings
-CREATE CLUSTER cl_flights_bookings(flight_id numeric(10)) HASHKEYS 128
-    storage (
-        INITIAL 8K
-    );
+CREATE CLUSTER cl_flights_bookings(flight_id numeric(10)) INDEX;
+
 CREATE INDEX idx_cl_flights ON CLUSTER cl_flights_bookings;
 
 DROP TABLE AIR_BOOKINGS CASCADE CONSTRAINTS;
@@ -32,8 +27,6 @@ CREATE CLUSTER cl_airports(airport_id numeric(5)) HASHKEYS 128
         INITIAL 1024K
     );
     
-CREATE INDEX idx_cl_airports ON CLUSTER cl_airports;
-
 DROP TABLE AIR_PASSENGERS_DETAILS CASCADE CONSTRAINTS;
 DROP TABLE AIR_AIRPORTS CASCADE CONSTRAINTS;
 
