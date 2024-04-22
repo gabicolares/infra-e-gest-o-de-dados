@@ -54,3 +54,33 @@ ALTER TABLE air_bookings ADD CONSTRAINT ak_flight_id UNIQUE (flight_id);
 ALTER TABLE air_bookings ADD CONSTRAINT ak_seat UNIQUE (seat);
 
 ALTER TABLE air_passengers ADD CONSTRAINT ak_passportno UNIQUE (passportno);
+
+-- indexes
+
+CREATE INDEX idx_aal_base_airport ON air_airlines(base_airport_id);
+
+CREATE INDEX idx_aap_airline_id ON air_airplanes(airline_id);
+CREATE INDEX idx_aap_airplane_typa ON air_airplanes(airplane_type_id);
+
+CREATE INDEX idx_af_flightno ON air_flights(flightno);
+CREATE INDEX idx_af_airline_id ON air_flights(airline_id);
+CREATE INDEX idx_af_from_airport_id ON air_flights(from_airport_id);
+CREATE INDEX idx_af_to_airpott_id ON air_flights(to_airport_id);
+CREATE INDEX idx_af_airplane_id ON air_flights(airplane_id);
+CREATE INDEX idx_af_departure ON air_flights(departure);
+
+CREATE INDEX idx_afs_airline_id ON air_flights_schedules(airline_id);
+CREATE INDEX idx_afs_from_airport_id ON air_flights_schedules(from_airport_id);
+CREATE INDEX idx_afs_to_airport_id ON air_flights_schedules(to_airport_id);
+
+CREATE INDEX idx_aapg_airport_id ON air_airports_geo(airport_id);
+CREATE INDEX idx_aapg_country ON air_airports_geo(country);
+CREATE INDEX idx_aapg_city ON air_airports_geo(city);
+
+CREATE INDEX idx_ab_passenger_id ON air_bookings(passenger_id);
+CREATE INDEX idx_ab_flight_id ON air_bookings(flight_id);
+
+CREATE INDEX idx_apd_passenger_id ON air_passengers_details(passenger_id);
+CREATE INDEX idx_apd_country ON air_passengers_details(country);
+CREATE INDEX idx_apd_birthdate ON air_passengers_details(birthdate);
+CREATE INDEX idx_apd_sex ON air_passengers_details(sex);

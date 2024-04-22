@@ -10,7 +10,7 @@ FROM air_passengers ap
     INNER JOIN air_passengers_details apd ON ap.passenger_id = apd.passenger_id
 WHERE
     apd.sex = 'w' 
-    AND TRUNC(MONTHS_BETWEEN(SYSDATE, apd.birthdate) / 12) > 40 
+    AND 40 < TRUNC(MONTHS_BETWEEN(SYSDATE, apd.birthdate) / 12)
     AND apd.country = 'BRAZIL';
 
 -- 2- Listar o nome da companhia aerea, o identificador da aeronave, o nome do tipo de aeronave e o numero de 
@@ -69,6 +69,8 @@ FROM air_airlines aal
     INNER JOIN air_airports_geo cidade_destino ON aap.airport_id = cidade_destino.airport_id
 WHERE cidade_destino.city = 'NEW YORK' AND (afs.tuesday = 1 OR afs.wednesday = 1 or afs.thursday = 1) AND EXTRACT(MONTH from af.departure) = 1;
 
+-- 5- Crie uma consulta que seja resolvida adequadamente com um acesso hash em um cluster com pelo menos duas tabelas. 
+-- A consulta deve utilizar todas as tabelas do cluster e pelo menos outra tabela fora dele.
 SELECT 
     aal.airline_name AS companhia,
     af.flightno AS numero_voo,
@@ -80,4 +82,4 @@ FROM air_airlines aal
     INNER JOIN air_passengers_details apd ON ap.passenger_id = apd.passenger_id
 WHERE
     apd.country = 'BRAZIL'
-    AND ab.flight_date BETWEEN TO_DATE('01/01/2024', 'DD/MM/YYYY') AND TO_DATE('31/12/2024', 'DD/MM/YYYY');
+    AND ab.flight_date BETWEEN TO_DATE('01/01/2024', 'dd/mm/yyyy') AND TO_DATE('31/12/2024', 'dd/mm/yyyy');
