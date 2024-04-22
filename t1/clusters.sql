@@ -1,3 +1,7 @@
+DROP CLUSTER clr_passengers;
+DROP CLUSTER clr_flights_bookings;
+DROP CLUSTER clr_airports;
+
 -- passengers-passengers_details
 CREATE CLUSTER clr_passengers(passenger_id numeric(12)) INDEX
     storage (
