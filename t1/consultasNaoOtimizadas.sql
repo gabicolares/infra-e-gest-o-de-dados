@@ -37,7 +37,7 @@ FROM
 WHERE
     origem.country = 'BRAZIL'
     AND
-    destino.country = 'BRAZIL'
+    destino.country = 'BRAZIL';
 
 -- 3- Listar o número do voo, o nome do aeroporto de saída e o nome do aeroporto de destino, o nome completo (primeiro e último nome) e o assento de cada passageiro, 
 -- para todos os voos que partem no dia do seu aniversário (do seu mesmo, caro aluno, e não o do passageiro) neste ano (caso a consulta não retorne nenhuma linha, 
@@ -74,7 +74,7 @@ WHERE cidade_destino.city = 'NEW YORK' AND (afs.tuesday = 1 OR afs.wednesday = 1
 SELECT 
     aal.airline_name AS companhia,
     af.flightno AS numero_voo,
-    COUNT(DISTINCT ap.passenger_id) AS total_passageiros
+    ap.firstname || ' ' || ap.lastname AS nome
 FROM air_airlines aal
     INNER JOIN air_flights af ON aal.airline_id = af.airline_id
     INNER JOIN air_bookings ab ON af.flight_id = ab.flight_id
@@ -82,4 +82,4 @@ FROM air_airlines aal
     INNER JOIN air_passengers_details apd ON ap.passenger_id = apd.passenger_id
 WHERE
     apd.country = 'BRAZIL'
-    AND ab.flight_date BETWEEN TO_DATE('01/01/2024', 'dd/mm/yyyy') AND TO_DATE('31/12/2024', 'dd/mm/yyyy');
+    AND ab.price BETWEEN 120.50 AND 150.00;

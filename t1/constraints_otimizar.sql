@@ -2,7 +2,7 @@
 
 ALTER TABLE air_airlines ADD CONSTRAINT pk_air_airlines PRIMARY KEY (airline_id);
 
-ALTER TABLE air_airplane ADD CONSTRAINT pk_air_airplane PRIMARY KEY (airplane_id);
+ALTER TABLE air_airplanes ADD CONSTRAINT pk_air_airplane PRIMARY KEY (airplane_id); 
 
 ALTER TABLE air_airplane_types ADD CONSTRAINT pk_air_airplane_types PRIMARY KEY (airplane_type_id);
 
@@ -50,9 +50,6 @@ ALTER TABLE air_airlines ADD CONSTRAINT ak_iata UNIQUE (iata);
 
 ALTER TABLE air_airports ADD CONSTRAINT ak_icao UNIQUE (icao);
 
-ALTER TABLE air_bookings ADD CONSTRAINT ak_flight_id UNIQUE (flight_id);
-ALTER TABLE air_bookings ADD CONSTRAINT ak_seat UNIQUE (seat);
-
 CREATE UNIQUE INDEX ak_air_bookings_flightidseat ON air_bookings (
     CASE
         WHEN seat IS NOT NULL THEN flight_id
@@ -76,7 +73,7 @@ CREATE INDEX idx_aap_airplane_typa ON air_airplanes(airplane_type_id);
 CREATE INDEX idx_af_flightno ON air_flights(flightno);
 CREATE INDEX idx_af_airline_id ON air_flights(airline_id);
 CREATE INDEX idx_af_from_airport_id ON air_flights(from_airport_id);
-CREATE INDEX idx_af_to_airpott_id ON air_flights(to_airport_id);
+CREATE INDEX idx_af_to_airport_id ON air_flights(to_airport_id);
 CREATE INDEX idx_af_airplane_id ON air_flights(airplane_id);
 CREATE INDEX idx_af_departure ON air_flights(departure);
 
@@ -84,14 +81,12 @@ CREATE INDEX idx_afs_airline_id ON air_flights_schedules(airline_id);
 CREATE INDEX idx_afs_from_airport_id ON air_flights_schedules(from_airport_id);
 CREATE INDEX idx_afs_to_airport_id ON air_flights_schedules(to_airport_id);
 
-CREATE INDEX idx_aapg_airport_id ON air_airports_geo(airport_id);
 CREATE INDEX idx_aapg_country ON air_airports_geo(country);
 CREATE INDEX idx_aapg_city ON air_airports_geo(city);
 
 CREATE INDEX idx_ab_passenger_id ON air_bookings(passenger_id);
 CREATE INDEX idx_ab_flight_id ON air_bookings(flight_id);
 
-CREATE INDEX idx_apd_passenger_id ON air_passengers_details(passenger_id);
 CREATE INDEX idx_apd_country ON air_passengers_details(country);
 CREATE INDEX idx_apd_birthdate ON air_passengers_details(birthdate);
 CREATE INDEX idx_apd_sex ON air_passengers_details(sex);
