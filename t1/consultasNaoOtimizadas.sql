@@ -68,3 +68,16 @@ FROM air_airlines aal
     INNER JOIN air_airports aap ON af.to_airport_id = aap.airport_id
     INNER JOIN air_airports_geo cidade_destino ON aap.airport_id = cidade_destino.airport_id
 WHERE cidade_destino.city = 'NEW YORK' AND (afs.tuesday = 1 OR afs.wednesday = 1 or afs.thursday = 1) AND EXTRACT(MONTH from af.departure) = 1;
+
+SELECT 
+    aal.airline_name AS companhia,
+    af.flightno AS numero_voo,
+    COUNT(DISTINCT ap.passenger_id) AS total_passageiros
+FROM air_airlines aal
+    INNER JOIN air_flights af ON aal.airline_id = af.airline_id
+    INNER JOIN air_bookings ab ON af.flight_id = ab.flight_id
+    INNER JOIN air_passengers ap ON ab.passenger_id = ap.passenger_id
+    INNER JOIN air_passengers_details apd ON ap.passenger_id = apd.passenger_id
+WHERE
+    apd.country = 'BRAZIL'
+    AND ab.flight_date BETWEEN TO_DATE('01/01/2024', 'DD/MM/YYYY') AND TO_DATE('31/12/2024', 'DD/MM/YYYY');
