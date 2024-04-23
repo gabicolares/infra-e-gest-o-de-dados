@@ -21,7 +21,7 @@ CREATE TABLE AIR_FLIGHTS CLUSTER clr_flights_bookings(flight_id) AS SELECT * FRO
 CREATE TABLE AIR_BOOKINGS CLUSTER clr_flights_bookings(flight_id) AS SELECT * FROM arruda.AIR_BOOKINGS;
  
 -- airports-passenger_details
-CREATE CLUSTER clr_airports(airport_id numeric(5)) HASHKEYS 128 SIZE 1024K;
+CREATE CLUSTER clr_airports(airport_id numeric(5)) HASHKEYS 128 SIZE 4K;
     
 DROP TABLE AIR_AIRPORTS_GEO CASCADE CONSTRAINTS;
 DROP TABLE AIR_AIRPORTS CASCADE CONSTRAINTS;
