@@ -59,6 +59,7 @@ WHERE TRUNC(af.departure) = TRUNC(TO_DATE('14/01/2024', 'dd/mm/yyyy'));
 -- 4- Listar o nome da companhia aérea bem como a data e a hora de saída de todos os voos que chegam para a cidade de 'NEW YORK' que partem às terças, 
 -- quartas ou quintas-feiras, no mês do seu aniversário  (caso a consulta não retorne nenhuma linha, faça para o mês subsequente até encontrar um mês que retorne alguma linha). 
 -- [resposta sugerida = 1 linha para o mês de março de 2024]
+
 SELECT 
     aal.airline_name AS companhia, 
     TO_CHAR(af.departure, 'dd/mm/yyyy hh24:mi') AS data_hora_saida
@@ -71,6 +72,7 @@ WHERE cidade_destino.city = 'NEW YORK' AND (afs.tuesday = 1 OR afs.wednesday = 1
 
 -- 5- Crie uma consulta que seja resolvida adequadamente com um acesso hash em um cluster com pelo menos duas tabelas. 
 -- A consulta deve utilizar todas as tabelas do cluster e pelo menos outra tabela fora dele.
+
 SELECT 
     aal.airline_name AS companhia,
     af.flightno AS numero_voo,
@@ -82,4 +84,4 @@ FROM air_airlines aal
     INNER JOIN air_passengers_details apd ON ap.passenger_id = apd.passenger_id
 WHERE
     apd.country = 'BRAZIL'
-    AND ab.price BETWEEN 120.50 AND 150.00;
+    AND ab.price > 120.50 AND ap.firstname LIKE 'A%';
