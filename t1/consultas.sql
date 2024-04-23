@@ -39,8 +39,9 @@ WHERE
     AND
     destino.country = 'BRAZIL';
 
--- 3- Listar o número do voo, o nome do aeroporto de saída e o nome do aeroporto de destino, o nome completo (primeiro e último nome) e o assento de cada passageiro, 
--- para todos os voos que partem no dia do seu aniversário (do seu mesmo, caro aluno, e não o do passageiro) neste ano (caso a consulta não retorne nenhuma linha, 
+-- 3- Listar o número do voo, o nome do aeroporto de saída e o nome do aeroporto de destino, o nome completo (primeiro e último nome) 
+-- e o assento de cada passageiro, para todos os voos que partem no dia do seu aniversário
+-- (do seu mesmo, caro aluno, e não o do passageiro) neste ano (caso a consulta não retorne nenhuma linha, 
 -- faça para o dia subsequente até encontrar uma data que retorne alguma linha). [resposta sugerida = 106 linhas para o dia 25/03/2024]
 
 SELECT 
@@ -57,7 +58,8 @@ FROM air_flights af
 WHERE TRUNC(af.departure) = TRUNC(TO_DATE('14/01/2024', 'dd/mm/yyyy'));
 
 -- 4- Listar o nome da companhia aérea bem como a data e a hora de saída de todos os voos que chegam para a cidade de 'NEW YORK' que partem às terças, 
--- quartas ou quintas-feiras, no mês do seu aniversário  (caso a consulta não retorne nenhuma linha, faça para o mês subsequente até encontrar um mês que retorne alguma linha). 
+-- quartas ou quintas-feiras, no mês do seu aniversário  (caso a consulta não retorne nenhuma linha, 
+-- faça para o mês subsequente até encontrar um mês que retorne alguma linha). 
 -- [resposta sugerida = 1 linha para o mês de março de 2024]
 
 SELECT 
