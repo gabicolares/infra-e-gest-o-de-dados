@@ -6,7 +6,6 @@ WHERE departure >= '2023-01-14 00:00:00'
 AND departure < '2023-01-15 00:00:00'
 ALLOW FILTERING;
 
-
 ---Q2---
 
 SELECT *
