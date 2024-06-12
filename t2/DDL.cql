@@ -37,6 +37,6 @@ CREATE TABLE IF NOT EXISTS AirplaneType_By_Airplane (
     airplaneId INT,
     airplaneTypeId INT,
     name TEXT,
-    PRIMARY KEY (airplaneId)
+    PRIMARY KEY (airplaneId, airplaneTypeId)
 )
 WITH CLUSTERING ORDER BY (airplaneTypeId asc);
